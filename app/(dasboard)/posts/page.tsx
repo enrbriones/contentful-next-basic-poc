@@ -4,7 +4,7 @@ import { fetchAllPosts } from "@/lib/contentful";
 
 export default async function Posts() {
   const posts = await fetchAllPosts();
-  // console.log("posts", posts);
+  console.log("posts", posts);
 
   return (
     <div className="mb-8">

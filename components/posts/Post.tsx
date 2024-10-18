@@ -15,19 +15,25 @@ interface Props {
 }
 
 export const Post = ({ post }: Props) => {
+  const { title, description, imgs } = post.fields;
+  const { name, lastName } = post.fields.user.fields;
+  const postDate = new Date(post.sys.createdAt).toDateString();
   return (
     <Card className="mb-4">
       <CardHeader>
-        <CardTitle>{post.fields.title}</CardTitle>
-        <CardDescription>{post.fields.user.fields.name}</CardDescription>
+        <div className="flex justify-between">
+          <CardTitle>{title}</CardTitle>
+          <CardDescription>{postDate}</CardDescription>
+        </div>
+        <CardDescription>{`${name} ${lastName}`}</CardDescription>
       </CardHeader>
-      {post.fields.imgs.length && (
+      {imgs?.length && (
         <CardContent className="flex justify-center">
-          {<ImageCarousel imgs={post.fields.imgs} />}
+          <ImageCarousel imgs={imgs} />
         </CardContent>
       )}
       <CardFooter>
-        <p>{post.fields.description}</p>
+        <p>{description}</p>
       </CardFooter>
     </Card>
   );
