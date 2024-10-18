@@ -1,18 +1,17 @@
-import { User } from "@/interfaces/user.interface";
-import { fetchEntries } from "@/lib/contentful";
+import { fetchAllUsers } from "@/lib/contentful";
+import { UserList } from "../../../components/users/UserList";
 
 export default async function Users() {
-  const users = await fetchEntries("user");
-  console.log("users", users);
-
-  if (!users) return <div>No se encontró</div>;
+  const users = await fetchAllUsers();
+  // console.log("users", users);
+  // users.map((user) => {
+  //   console.log("POSTS", user.fields.posts);
+  // });
 
   return (
     <div>
-      <h1>Users</h1>
-      {users.map((user) => (
-        <p key={user.sys.id}>{user.fields.name as string}</p>
-      ))}
+      <h1 className="text-2xl mb-3">Usuarios</h1>
+      <UserList users={users} />
     </div>
   );
 }

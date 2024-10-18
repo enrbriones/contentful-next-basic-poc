@@ -2,13 +2,13 @@
 import { useState } from "react";
 import { ActiveMenu } from "../active-menu/ActiveMenu";
 
-export const Navbar = () => {
+const Navbar = () => {
   const [hidden, setHidden] = useState(true);
 
   const navItems = [
     { path: "/", text: "Home" },
-    { path: "/users", text: "Users" },
-    { path: "/posts", text: "Posts" },
+    { path: "/users", text: "Usuarios" },
+    { path: "/posts", text: "Publicaciones" },
   ];
 
   const toggleMenu = () => {
@@ -19,7 +19,7 @@ export const Navbar = () => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="#" className="flex items-center space-x-3 rtl:space-x-reverse">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            Home
+            Contentful POC
           </span>
         </a>
         <button
@@ -51,9 +51,14 @@ export const Navbar = () => {
           className={`${hidden ? "hidden" : ""} w-full`}
           id="navbar-hamburger"
         >
-          <ul className="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+          <ul className="font-medium mt-4 rounded-lg bg-gray-100 dark:bg-gray-800 dark:border-gray-700 z-10 absolute w-72 right-10">
             {navItems.map(({ path, text }) => (
-              <ActiveMenu key={text} path={path} text={text} />
+              <ActiveMenu
+                key={text}
+                path={path}
+                text={text}
+                toggleMenu={toggleMenu}
+              />
             ))}
           </ul>
         </div>
@@ -61,3 +66,5 @@ export const Navbar = () => {
     </nav>
   );
 };
+
+export default Navbar;
